@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flatfoot Effects Survey</title>
+<style>
+:root{--ink:#1f2937;--muted:#6b7280;--line:#d1d5db;--bg:#f5f7fb;--card:#fff;--accent:#263a63}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+.container{max-width:1000px;margin:25px auto;padding:0 16px}.card{background:var(--card);border-radius:14px;padding:24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+h1{margin:0 0 6px;text-align:center}.subtitle{text-align:center;color:var(--muted);margin-bottom:22px}
+h2{font-size:21px;margin-top:0;border-bottom:2px solid #e5e7eb;padding-bottom:8px} h3{font-size:17px;margin:20px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.full{grid-column:1/-1}
+.field label.title{display:block;font-weight:700;margin-bottom:7px}.option{display:block;margin:8px 0;padding:7px 8px;border-radius:7px}.option:hover{background:#f3f4f6}
+input[type=text],input[type=number],select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:7px;font-size:15px}
+textarea{min-height:90px;resize:vertical}.hint{font-size:13px;color:var(--muted);margin-top:5px}
+.session{background:#eef2ff;border:1px solid #c7d2fe}.hidden{display:none}
+table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid var(--line);padding:8px;text-align:center;font-size:13px}th:first-child,td:first-child{text-align:left}th{background:#f3f4f6}
+.pain-score{width:90px!important}.buttons{display:flex;gap:12px;justify-content:flex-end;align-items:center}.btn{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:#fff}.secondary{background:#e5e7eb}.status{margin-right:auto;font-weight:600}
+.notice{padding:12px;border-radius:8px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.card{padding:17px}table{font-size:11px}th,td{padding:5px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+<h1>FLATFOOT EFFECTS SURVEY QUESTIONNAIRE</h1>
+<div class="subtitle">Pressure, Pain, Posture and Daily-Life Effects of Flatfoot — Baseline (Day 0) and Follow-up (Day 30)</div>
+<div class="notice">Tick one option per question unless it says “select all that apply.” Pain is scored from 0 (no pain) to 10 (worst pain imaginable). Answers are used for research and identified by Subject ID.</div>
+</div>
+
+<form id="surveyForm">
+<div class="card session">
+<h2>Session Information</h2>
+<div class="grid">
+<div class="field"><label class="title">Subject ID *</label><input name="Subject_ID" required></div>
+<div class="field"><label class="title">Session *</label>
+<select name="Session" id="session" required><option value="">Select</option><option value="Baseline (Day 0)">Baseline (Day 0)</option><option value="Follow-up (Day 30)">Follow-up (Day 30)</option></select></div>
+<div class="field"><label class="title">Date of session *</label><input type="date" name="Session_Date" required></div>
+</div>
+</div>
+
+<div class="card baseline-section"><h2>Consent</h2>
+<div class="field"><label class="title">Q1. Consent</label><label class="option"><input type="radio" name="Q1" value="Yes, I agree" required> Yes, I agree</label><label class="option"><input type="radio" name="Q1" value="No, I do not agree" required> No, I do not agree</label></div>
+<div class="field"><label class="title">Q2. If under 18, parent/guardian written consent</label><label class="option"><input type="radio" name="Q2" value="Yes" required> Yes</label><label class="option"><input type="radio" name="Q2" value="No" required> No</label><label class="option"><input type="radio" name="Q2" value="Not applicable (18 or older)" required> Not applicable (18 or older)</label></div>
+</div>
+<div class="card baseline-section"><h2>Part A: Participant Details</h2><div class="grid">
+<div class="field"><label class="title">Q3. Age group</label><label class="option"><input type="radio" name="Q3" value="Below 18" required> Below 18</label><label class="option"><input type="radio" name="Q3" value="18–20" required> 18–20</label><label class="option"><input type="radio" name="Q3" value="21–25" required> 21–25</label><label class="option"><input type="radio" name="Q3" value="26–35" required> 26–35</label><label class="option"><input type="radio" name="Q3" value="36–50" required> 36–50</label><label class="option"><input type="radio" name="Q3" value="Above 50" required> Above 50</label></div>
+<div class="field"><label class="title">Q4. Gender</label><label class="option"><input type="radio" name="Q4" value="Female" required> Female</label><label class="option"><input type="radio" name="Q4" value="Male" required> Male</label><label class="option"><input type="radio" name="Q4" value="Prefer not to say" required> Prefer not to say</label></div>
+<div class="field"><label class="title">Q5. Height (cm)</label><input type="number" step="0.1" min="20" max="250" name="Q5_Height_cm"></div>
+<div class="field"><label class="title">Weight (kg)</label><input type="number" step="0.1" min="1" max="500" name="Q5_Weight_kg"></div>
+<div class="field"><label class="title">Q6. Current occupation</label><label class="option"><input type="radio" name="Q6" value="Student" required> Student</label><label class="option"><input type="radio" name="Q6" value="Teaching or office work (mostly sitting)" required> Teaching or office work (mostly sitting)</label><label class="option"><input type="radio" name="Q6" value="Work needing long standing or walking" required> Work needing long standing or walking</label><label class="option"><input type="radio" name="Q6" value="Sports or fitness professional" required> Sports or fitness professional</label><label class="option"><input type="radio" name="Q6" value="Other" required> Other</label><input type="text" name="Q6_Other" placeholder="If Other, specify" style="margin-top:6px"></div>
+<div class="field"><label class="title">Q7. Average hours standing or walking per day</label><label class="option"><input type="radio" name="Q7" value="Less than 2 hours" required> Less than 2 hours</label><label class="option"><input type="radio" name="Q7" value="2–4 hours" required> 2–4 hours</label><label class="option"><input type="radio" name="Q7" value="4–6 hours" required> 4–6 hours</label><label class="option"><input type="radio" name="Q7" value="More than 6 hours" required> More than 6 hours</label></div>
+<div class="field"><label class="title">Q8. Exercise/sports frequency</label><label class="option"><input type="radio" name="Q8" value="Rarely or never" required> Rarely or never</label><label class="option"><input type="radio" name="Q8" value="1–2 days a week" required> 1–2 days a week</label><label class="option"><input type="radio" name="Q8" value="3–4 days a week" required> 3–4 days a week</label><label class="option"><input type="radio" name="Q8" value="5 or more days a week" required> 5 or more days a week</label></div>
+<div class="field"><label class="title">Q9. Usual travel to college/work</label><label class="option"><input type="radio" name="Q9" value="Walk" required> Walk</label><label class="option"><input type="radio" name="Q9" value="Bicycle" required> Bicycle</label><label class="option"><input type="radio" name="Q9" value="Two-wheeler" required> Two-wheeler</label><label class="option"><input type="radio" name="Q9" value="Bus or train" required> Bus or train</label><label class="option"><input type="radio" name="Q9" value="Car" required> Car</label></div>
+<div class="field"><label class="title">Q10. Hours sitting per day</label><label class="option"><input type="radio" name="Q10" value="Less than 4 hours" required> Less than 4 hours</label><label class="option"><input type="radio" name="Q10" value="4–6 hours" required> 4–6 hours</label><label class="option"><input type="radio" name="Q10" value="6–8 hours" required> 6–8 hours</label><label class="option"><input type="radio" name="Q10" value="More than 8 hours" required> More than 8 hours</label></div>
+</div></div>
+<div class="card baseline-section"><h2>Part B: Your Feet</h2><div class="grid">
+<div class="field"><label class="title">Q11. Doctor/physio told you you have flat feet?</label><label class="option"><input type="radio" name="Q11" value="Yes, both feet" required> Yes, both feet</label><label class="option"><input type="radio" name="Q11" value="Yes, left foot only" required> Yes, left foot only</label><label class="option"><input type="radio" name="Q11" value="Yes, right foot only" required> Yes, right foot only</label><label class="option"><input type="radio" name="Q11" value="No, but I think I may have flat feet" required> No, but I think I may have flat feet</label><label class="option"><input type="radio" name="Q11" value="No or not sure" required> No or not sure</label></div>
+<div class="field"><label class="title">Q12. Does arch touch floor when standing?</label><label class="option"><input type="radio" name="Q12" value="Yes, in both feet" required> Yes, in both feet</label><label class="option"><input type="radio" name="Q12" value="Yes, in one foot only" required> Yes, in one foot only</label><label class="option"><input type="radio" name="Q12" value="Slightly" required> Slightly</label><label class="option"><input type="radio" name="Q12" value="No, I have a clear arch" required> No, I have a clear arch</label></div>
+<div class="field"><label class="title">Q13. Wet-footprint check</label><label class="option"><input type="radio" name="Q13" value="Full footprint with no inward curve (flat)" required> Full footprint with no inward curve (flat)</label><label class="option"><input type="radio" name="Q13" value="Very narrow strip in the middle (normal or high arch)" required> Very narrow strip in the middle (normal or high arch)</label><label class="option"><input type="radio" name="Q13" value="Something in between" required> Something in between</label><label class="option"><input type="radio" name="Q13" value="Not tried" required> Not tried</label></div>
+<div class="field"><label class="title">Q14. Age first noticed flat feet</label><label class="option"><input type="radio" name="Q14" value="Childhood (below 12)" required> Childhood (below 12)</label><label class="option"><input type="radio" name="Q14" value="Teenage years" required> Teenage years</label><label class="option"><input type="radio" name="Q14" value="Adulthood" required> Adulthood</label><label class="option"><input type="radio" name="Q14" value="After an injury, pregnancy or weight gain" required> After an injury, pregnancy or weight gain</label><label class="option"><input type="radio" name="Q14" value="Not sure" required> Not sure</label></div>
+<div class="field"><label class="title">Q15. Heels tilting outward / ankles rolling inward?</label><label class="option"><input type="radio" name="Q15" value="Yes, both feet" required> Yes, both feet</label><label class="option"><input type="radio" name="Q15" value="Yes, one foot" required> Yes, one foot</label><label class="option"><input type="radio" name="Q15" value="No" required> No</label><label class="option"><input type="radio" name="Q15" value="Not sure" required> Not sure</label></div>
+<div class="field"><label class="title">Q16. Family history of flat feet</label><label class="option"><input type="radio" name="Q16" value="Yes" required> Yes</label><label class="option"><input type="radio" name="Q16" value="No" required> No</label><label class="option"><input type="radio" name="Q16" value="Not sure" required> Not sure</label></div>
+<div class="field"><label class="title">Q17. Footwear used most days</label><label class="option"><input type="radio" name="Q17" value="Sports or running shoes" required> Sports or running shoes</label><label class="option"><input type="radio" name="Q17" value="Flat sandals or slippers" required> Flat sandals or slippers</label><label class="option"><input type="radio" name="Q17" value="Formal or leather shoes" required> Formal or leather shoes</label><label class="option"><input type="radio" name="Q17" value="Heels" required> Heels</label><label class="option"><input type="radio" name="Q17" value="Barefoot at home mostly" required> Barefoot at home mostly</label></div>
+<div class="field"><label class="title">Q18. Frequency of heels/very flat unsupportive footwear</label><label class="option"><input type="radio" name="Q18" value="Never" required> Never</label><label class="option"><input type="radio" name="Q18" value="Occasionally" required> Occasionally</label><label class="option"><input type="radio" name="Q18" value="Often" required> Often</label><label class="option"><input type="radio" name="Q18" value="Daily" required> Daily</label></div>
+<div class="field"><label class="title">Q19. Arch-support insoles/orthotics</label><label class="option"><input type="radio" name="Q19" value="Yes, regularly" required> Yes, regularly</label><label class="option"><input type="radio" name="Q19" value="Sometimes" required> Sometimes</label><label class="option"><input type="radio" name="Q19" value="No" required> No</label></div>
+<div class="field"><label class="title">Q20. Foot/ankle/leg injury or surgery past 2 years</label><label class="option"><input type="radio" name="Q20" value="Yes" required> Yes</label><label class="option"><input type="radio" name="Q20" value="No" required> No</label><input type="text" name="Q20_Description" placeholder="If Yes, please describe" style="margin-top:6px"></div>
+<div class="field"><label class="title">Q21. Other condition affecting walking</label><label class="option"><input type="radio" name="Q21" value="Yes" required> Yes</label><label class="option"><input type="radio" name="Q21" value="No" required> No</label><input type="text" name="Q21_Description" placeholder="If Yes, please describe" style="margin-top:6px"></div>
+</div></div>
+<div class="card"><h2>Part C: Pain and Discomfort in the Last 4 Weeks</h2>
+<p class="hint">For each body area, enter a pain score (0–10) and select how often it bothers you.</p>
+<table><thead><tr><th>Body area</th><th>Pain 0–10</th><th>Never</th><th>Sometimes</th><th>Often</th><th>Daily</th></tr></thead><tbody>
+<tr><td>Foot arch (inner side)</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_1_Pain"></td>
+<td><input type="radio" name="Q22_1_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_1_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_1_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_1_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Heel</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_2_Pain"></td>
+<td><input type="radio" name="Q22_2_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_2_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_2_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_2_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Ball of foot / forefoot</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_3_Pain"></td>
+<td><input type="radio" name="Q22_3_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_3_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_3_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_3_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Ankle</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_4_Pain"></td>
+<td><input type="radio" name="Q22_4_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_4_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_4_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_4_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Calf muscle</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_5_Pain"></td>
+<td><input type="radio" name="Q22_5_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_5_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_5_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_5_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Shin</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_6_Pain"></td>
+<td><input type="radio" name="Q22_6_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_6_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_6_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_6_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Knee</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_7_Pain"></td>
+<td><input type="radio" name="Q22_7_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_7_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_7_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_7_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Hip</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_8_Pain"></td>
+<td><input type="radio" name="Q22_8_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_8_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_8_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_8_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Lower back</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_9_Pain"></td>
+<td><input type="radio" name="Q22_9_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_9_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_9_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_9_Frequency" value="Daily"></td>
+</tr>
+<tr><td>Upper back / neck</td><td><input class="pain-score" type="number" min="0" max="10" name="Q22_10_Pain"></td>
+<td><input type="radio" name="Q22_10_Frequency" value="Never"></td>
+<td><input type="radio" name="Q22_10_Frequency" value="Sometimes"></td>
+<td><input type="radio" name="Q22_10_Frequency" value="Often"></td>
+<td><input type="radio" name="Q22_10_Frequency" value="Daily"></td>
+</tr>
+</tbody></table>
+<div class="field" style="margin-top:18px"><label class="title">Q23. Overall, how would you rate your foot-related pain right now?</label><input type="range" min="0" max="10" value="0" name="Q23" oninput="this.nextElementSibling.textContent=this.value"><span>0</span></div>
+<div class="field" style="margin-top:16px"><label class="title">Q24. When pain is usually worst</label><label class="option"><input type="radio" name="Q24" value="Morning, on first steps" required> Morning, on first steps</label><label class="option"><input type="radio" name="Q24" value="After long standing or walking" required> After long standing or walking</label><label class="option"><input type="radio" name="Q24" value="Evening" required> Evening</label><label class="option"><input type="radio" name="Q24" value="During or after exercise" required> During or after exercise</label><label class="option"><input type="radio" name="Q24" value="No particular time" required> No particular time</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q25. Pain feels like</label><label class="option"><input type="checkbox" name="Q25" value="Dull ache"> Dull ache</label><label class="option"><input type="checkbox" name="Q25" value="Sharp or stabbing"> Sharp or stabbing</label><label class="option"><input type="checkbox" name="Q25" value="Burning"> Burning</label><label class="option"><input type="checkbox" name="Q25" value="Cramping"> Cramping</label><label class="option"><input type="checkbox" name="Q25" value="Tingling or numbness"> Tingling or numbness</label><label class="option"><input type="checkbox" name="Q25" value="Stiffness"> Stiffness</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q26. Pain wakes you at night</label><label class="option"><input type="radio" name="Q26" value="Never" required> Never</label><label class="option"><input type="radio" name="Q26" value="Sometimes" required> Sometimes</label><label class="option"><input type="radio" name="Q26" value="Often" required> Often</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q27. What eases the pain</label><label class="option"><input type="checkbox" name="Q27" value="Rest"> Rest</label><label class="option"><input type="checkbox" name="Q27" value="Sitting with feet up"> Sitting with feet up</label><label class="option"><input type="checkbox" name="Q27" value="Stretching or massage"> Stretching or massage</label><label class="option"><input type="checkbox" name="Q27" value="Supportive footwear or insoles"> Supportive footwear or insoles</label><label class="option"><input type="checkbox" name="Q27" value="Pain medicine"> Pain medicine</label><label class="option"><input type="checkbox" name="Q27" value="Nothing helps"> Nothing helps</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q28. Leg cramps/muscle tightness after walking</label><label class="option"><input type="radio" name="Q28" value="Never" required> Never</label><label class="option"><input type="radio" name="Q28" value="Sometimes" required> Sometimes</label><label class="option"><input type="radio" name="Q28" value="Often" required> Often</label><label class="option"><input type="radio" name="Q28" value="Always" required> Always</label></div>
+</div>
+<div class="card"><h2>Part D: Walking, Posture and Daily Life</h2><p class="hint">1 = Strongly disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly agree.</p><table><thead><tr><th>Statement</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>
+<tr><td>1. My feet get tired quickly when I walk or stand</td>
+<td><input type="radio" name="Q29_1" value="1"></td>
+<td><input type="radio" name="Q29_1" value="2"></td>
+<td><input type="radio" name="Q29_1" value="3"></td>
+<td><input type="radio" name="Q29_1" value="4"></td>
+<td><input type="radio" name="Q29_1" value="5"></td>
+</tr>
+<tr><td>2. I feel aching after standing for more than 30 minutes</td>
+<td><input type="radio" name="Q29_2" value="1"></td>
+<td><input type="radio" name="Q29_2" value="2"></td>
+<td><input type="radio" name="Q29_2" value="3"></td>
+<td><input type="radio" name="Q29_2" value="4"></td>
+<td><input type="radio" name="Q29_2" value="5"></td>
+</tr>
+<tr><td>3. My knees turn inward when I walk, stand or climb stairs</td>
+<td><input type="radio" name="Q29_3" value="1"></td>
+<td><input type="radio" name="Q29_3" value="2"></td>
+<td><input type="radio" name="Q29_3" value="3"></td>
+<td><input type="radio" name="Q29_3" value="4"></td>
+<td><input type="radio" name="Q29_3" value="5"></td>
+</tr>
+<tr><td>4. My shoes wear unevenly (inner edge or heel)</td>
+<td><input type="radio" name="Q29_4" value="1"></td>
+<td><input type="radio" name="Q29_4" value="2"></td>
+<td><input type="radio" name="Q29_4" value="3"></td>
+<td><input type="radio" name="Q29_4" value="4"></td>
+<td><input type="radio" name="Q29_4" value="5"></td>
+</tr>
+<tr><td>5. I walk with my feet turned outward</td>
+<td><input type="radio" name="Q29_5" value="1"></td>
+<td><input type="radio" name="Q29_5" value="2"></td>
+<td><input type="radio" name="Q29_5" value="3"></td>
+<td><input type="radio" name="Q29_5" value="4"></td>
+<td><input type="radio" name="Q29_5" value="5"></td>
+</tr>
+<tr><td>6. I feel unsteady or lose balance easily</td>
+<td><input type="radio" name="Q29_6" value="1"></td>
+<td><input type="radio" name="Q29_6" value="2"></td>
+<td><input type="radio" name="Q29_6" value="3"></td>
+<td><input type="radio" name="Q29_6" value="4"></td>
+<td><input type="radio" name="Q29_6" value="5"></td>
+</tr>
+<tr><td>7. My lower back aches after long walking or standing</td>
+<td><input type="radio" name="Q29_7" value="1"></td>
+<td><input type="radio" name="Q29_7" value="2"></td>
+<td><input type="radio" name="Q29_7" value="3"></td>
+<td><input type="radio" name="Q29_7" value="4"></td>
+<td><input type="radio" name="Q29_7" value="5"></td>
+</tr>
+<tr><td>8. My shoulders or hips look uneven when I stand</td>
+<td><input type="radio" name="Q29_8" value="1"></td>
+<td><input type="radio" name="Q29_8" value="2"></td>
+<td><input type="radio" name="Q29_8" value="3"></td>
+<td><input type="radio" name="Q29_8" value="4"></td>
+<td><input type="radio" name="Q29_8" value="5"></td>
+</tr>
+<tr><td>9. I lean forward or slouch when I stand or walk</td>
+<td><input type="radio" name="Q29_9" value="1"></td>
+<td><input type="radio" name="Q29_9" value="2"></td>
+<td><input type="radio" name="Q29_9" value="3"></td>
+<td><input type="radio" name="Q29_9" value="4"></td>
+<td><input type="radio" name="Q29_9" value="5"></td>
+</tr>
+<tr><td>10. I shift my weight onto one leg when standing</td>
+<td><input type="radio" name="Q29_10" value="1"></td>
+<td><input type="radio" name="Q29_10" value="2"></td>
+<td><input type="radio" name="Q29_10" value="3"></td>
+<td><input type="radio" name="Q29_10" value="4"></td>
+<td><input type="radio" name="Q29_10" value="5"></td>
+</tr>
+<tr><td>11. Foot or leg pain limits my sports or exercise</td>
+<td><input type="radio" name="Q29_11" value="1"></td>
+<td><input type="radio" name="Q29_11" value="2"></td>
+<td><input type="radio" name="Q29_11" value="3"></td>
+<td><input type="radio" name="Q29_11" value="4"></td>
+<td><input type="radio" name="Q29_11" value="5"></td>
+</tr>
+<tr><td>12. Foot or leg pain limits my walking distance or climbing stairs</td>
+<td><input type="radio" name="Q29_12" value="1"></td>
+<td><input type="radio" name="Q29_12" value="2"></td>
+<td><input type="radio" name="Q29_12" value="3"></td>
+<td><input type="radio" name="Q29_12" value="4"></td>
+<td><input type="radio" name="Q29_12" value="5"></td>
+</tr>
+<tr><td>13. Foot or leg pain affects my sleep or mood</td>
+<td><input type="radio" name="Q29_13" value="1"></td>
+<td><input type="radio" name="Q29_13" value="2"></td>
+<td><input type="radio" name="Q29_13" value="3"></td>
+<td><input type="radio" name="Q29_13" value="4"></td>
+<td><input type="radio" name="Q29_13" value="5"></td>
+</tr>
+<tr><td>14. Foot or leg pain affects my concentration at class or work</td>
+<td><input type="radio" name="Q29_14" value="1"></td>
+<td><input type="radio" name="Q29_14" value="2"></td>
+<td><input type="radio" name="Q29_14" value="3"></td>
+<td><input type="radio" name="Q29_14" value="4"></td>
+<td><input type="radio" name="Q29_14" value="5"></td>
+</tr>
+</tbody></table>
+<div class="field" style="margin-top:16px"><label class="title">Q30. Activities difficult because of feet</label><label class="option"><input type="checkbox" name="Q30" value="Standing for long periods"> Standing for long periods</label><label class="option"><input type="checkbox" name="Q30" value="Walking long distances"> Walking long distances</label><label class="option"><input type="checkbox" name="Q30" value="Climbing stairs"> Climbing stairs</label><label class="option"><input type="checkbox" name="Q30" value="Running or jogging"> Running or jogging</label><label class="option"><input type="checkbox" name="Q30" value="Sports"> Sports</label><label class="option"><input type="checkbox" name="Q30" value="Wearing certain footwear"> Wearing certain footwear</label><label class="option"><input type="checkbox" name="Q30" value="Squatting or sitting cross-legged"> Squatting or sitting cross-legged</label><label class="option"><input type="checkbox" name="Q30" value="None"> None</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q31. Comfortable walking distance before pain/tiredness</label><label class="option"><input type="radio" name="Q31" value="Less than 200 metres" required> Less than 200 metres</label><label class="option"><input type="radio" name="Q31" value="200 metres to 1 km" required> 200 metres to 1 km</label><label class="option"><input type="radio" name="Q31" value="1–3 km" required> 1–3 km</label><label class="option"><input type="radio" name="Q31" value="More than 3 km" required> More than 3 km</label><label class="option"><input type="radio" name="Q31" value="No limit" required> No limit</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q32. Days of class/work missed past year due to foot/leg/back pain</label><label class="option"><input type="radio" name="Q32" value="None" required> None</label><label class="option"><input type="radio" name="Q32" value="1–3 days" required> 1–3 days</label><label class="option"><input type="radio" name="Q32" value="4–10 days" required> 4–10 days</label><label class="option"><input type="radio" name="Q32" value="More than 10 days" required> More than 10 days</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q33. More affected side</label><label class="option"><input type="radio" name="Q33" value="Left" required> Left</label><label class="option"><input type="radio" name="Q33" value="Right" required> Right</label><label class="option"><input type="radio" name="Q33" value="Both equally" required> Both equally</label><label class="option"><input type="radio" name="Q33" value="Not sure" required> Not sure</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q34. Side with more weight when standing</label><label class="option"><input type="radio" name="Q34" value="Left" required> Left</label><label class="option"><input type="radio" name="Q34" value="Right" required> Right</label><label class="option"><input type="radio" name="Q34" value="Equal" required> Equal</label></div>
+</div>
+<div class="card baseline-section"><h2>Part E: Treatment and Exercise History</h2>
+<div class="field" style="margin-top:16px"><label class="title">Q35. Physiotherapy or foot exercises</label><label class="option"><input type="radio" name="Q35" value="Yes, currently" required> Yes, currently</label><label class="option"><input type="radio" name="Q35" value="Yes, in the past" required> Yes, in the past</label><label class="option"><input type="radio" name="Q35" value="No" required> No</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q36. Exercises tried</label><label class="option"><input type="checkbox" name="Q36" value="Short-foot or arch-lifting exercises"> Short-foot or arch-lifting exercises</label><label class="option"><input type="checkbox" name="Q36" value="Towel curls or marble pick-ups"> Towel curls or marble pick-ups</label><label class="option"><input type="checkbox" name="Q36" value="Calf stretching"> Calf stretching</label><label class="option"><input type="checkbox" name="Q36" value="Balance exercises"> Balance exercises</label><label class="option"><input type="checkbox" name="Q36" value="Hip or core strengthening"> Hip or core strengthening</label><label class="option"><input type="checkbox" name="Q36" value="Massage or foot rolling"> Massage or foot rolling</label><label class="option"><input type="checkbox" name="Q36" value="None"> None</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q37. Pain medicine for foot/leg/back pain</label><label class="option"><input type="radio" name="Q37" value="Yes, regularly" required> Yes, regularly</label><label class="option"><input type="radio" name="Q37" value="Occasionally" required> Occasionally</label><label class="option"><input type="radio" name="Q37" value="No" required> No</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q38. Consulted about feet</label><label class="option"><input type="checkbox" name="Q38" value="Orthopaedic doctor"> Orthopaedic doctor</label><label class="option"><input type="checkbox" name="Q38" value="Physiotherapist"> Physiotherapist</label><label class="option"><input type="checkbox" name="Q38" value="General doctor"> General doctor</label><label class="option"><input type="checkbox" name="Q38" value="Podiatrist or orthotist"> Podiatrist or orthotist</label><label class="option"><input type="checkbox" name="Q38" value="None"> None</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q39. Willing to follow guided 30-day foot exercise programme</label><label class="option"><input type="radio" name="Q39" value="Yes" required> Yes</label><label class="option"><input type="radio" name="Q39" value="Maybe" required> Maybe</label><label class="option"><input type="radio" name="Q39" value="No" required> No</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q40. Realistic exercise time per day</label><label class="option"><input type="radio" name="Q40" value="Under 10 minutes" required> Under 10 minutes</label><label class="option"><input type="radio" name="Q40" value="10–20 minutes" required> 10–20 minutes</label><label class="option"><input type="radio" name="Q40" value="20–30 minutes" required> 20–30 minutes</label><label class="option"><input type="radio" name="Q40" value="More than 30 minutes" required> More than 30 minutes</label></div>
+</div>
+<div class="card followup-section"><h2>Part F: Day-30 Follow-up</h2><p class="hint">For Day 30, Q22 and Q29 above are completed again for comparison with Day 0.</p>
+<div class="field" style="margin-top:16px"><label class="title">Q41. Days exercised during 30 days</label><label class="option"><input type="radio" name="Q41" value="Fewer than 10 days" required> Fewer than 10 days</label><label class="option"><input type="radio" name="Q41" value="10–19 days" required> 10–19 days</label><label class="option"><input type="radio" name="Q41" value="20–26 days" required> 20–26 days</label><label class="option"><input type="radio" name="Q41" value="27–30 days" required> 27–30 days</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q42. Typical exercise-day duration</label><label class="option"><input type="radio" name="Q42" value="Less than 10 minutes" required> Less than 10 minutes</label><label class="option"><input type="radio" name="Q42" value="10–20 minutes" required> 10–20 minutes</label><label class="option"><input type="radio" name="Q42" value="20–30 minutes" required> 20–30 minutes</label><label class="option"><input type="radio" name="Q42" value="More than 30 minutes" required> More than 30 minutes</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q43. Foot condition change</label><label class="option"><input type="radio" name="Q43" value="Much better" required> Much better</label><label class="option"><input type="radio" name="Q43" value="Somewhat better" required> Somewhat better</label><label class="option"><input type="radio" name="Q43" value="No change" required> No change</label><label class="option"><input type="radio" name="Q43" value="Somewhat worse" required> Somewhat worse</label><label class="option"><input type="radio" name="Q43" value="Much worse" required> Much worse</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q44. Lower back/knee/leg pain change</label><label class="option"><input type="radio" name="Q44" value="Much better" required> Much better</label><label class="option"><input type="radio" name="Q44" value="Somewhat better" required> Somewhat better</label><label class="option"><input type="radio" name="Q44" value="No change" required> No change</label><label class="option"><input type="radio" name="Q44" value="Somewhat worse" required> Somewhat worse</label><label class="option"><input type="radio" name="Q44" value="Much worse" required> Much worse</label><label class="option"><input type="radio" name="Q44" value="I had no such pain" required> I had no such pain</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q45. Change in standing/walking</label><label class="option"><input type="radio" name="Q45" value="Yes, improved" required> Yes, improved</label><label class="option"><input type="radio" name="Q45" value="No change" required> No change</label><label class="option"><input type="radio" name="Q45" value="Yes, worsened" required> Yes, worsened</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q46. Can now walk further before pain/tiredness</label><label class="option"><input type="radio" name="Q46" value="Yes, much further" required> Yes, much further</label><label class="option"><input type="radio" name="Q46" value="Yes, slightly further" required> Yes, slightly further</label><label class="option"><input type="radio" name="Q46" value="No change" required> No change</label><label class="option"><input type="radio" name="Q46" value="Less far" required> Less far</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q47. Exercises caused pain/difficulty</label><label class="option"><input type="radio" name="Q47" value="No" required> No</label><label class="option"><input type="radio" name="Q47" value="Mild, settled quickly" required> Mild, settled quickly</label><label class="option"><input type="radio" name="Q47" value="Moderate" required> Moderate</label><label class="option"><input type="radio" name="Q47" value="Severe, I stopped" required> Severe, I stopped</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q48. Most helpful exercises</label><label class="option"><input type="checkbox" name="Q48" value="Short-foot exercise"> Short-foot exercise</label><label class="option"><input type="checkbox" name="Q48" value="Towel curls"> Towel curls</label><label class="option"><input type="checkbox" name="Q48" value="Calf stretching"> Calf stretching</label><label class="option"><input type="checkbox" name="Q48" value="Balance exercises"> Balance exercises</label><label class="option"><input type="checkbox" name="Q48" value="Hip or core strengthening"> Hip or core strengthening</label><label class="option"><input type="checkbox" name="Q48" value="None helped"> None helped</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q49. What stopped exercise on some days</label><label class="option"><input type="checkbox" name="Q49" value="Lack of time"> Lack of time</label><label class="option"><input type="checkbox" name="Q49" value="Forgot"> Forgot</label><label class="option"><input type="checkbox" name="Q49" value="Pain"> Pain</label><label class="option"><input type="checkbox" name="Q49" value="Boredom"> Boredom</label><label class="option"><input type="checkbox" name="Q49" value="Tiredness"> Tiredness</label><label class="option"><input type="checkbox" name="Q49" value="Nothing, I did them every day"> Nothing, I did them every day</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q50. New treatment/insoles/medicine during 30 days</label><label class="option"><input type="radio" name="Q50" value="No" required> No</label><label class="option"><input type="radio" name="Q50" value="Yes" required> Yes</label><input type="text" name="Q50_Description" placeholder="If Yes, please describe" style="margin-top:6px"></div>
+<div class="field" style="margin-top:16px"><label class="title">Q51. Programme satisfaction</label><label class="option"><input type="radio" name="Q51" value="Very satisfied" required> Very satisfied</label><label class="option"><input type="radio" name="Q51" value="Satisfied" required> Satisfied</label><label class="option"><input type="radio" name="Q51" value="Neutral" required> Neutral</label><label class="option"><input type="radio" name="Q51" value="Dissatisfied" required> Dissatisfied</label><label class="option"><input type="radio" name="Q51" value="Very dissatisfied" required> Very dissatisfied</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q52. Recommend programme</label><label class="option"><input type="radio" name="Q52" value="Definitely" required> Definitely</label><label class="option"><input type="radio" name="Q52" value="Probably" required> Probably</label><label class="option"><input type="radio" name="Q52" value="Not sure" required> Not sure</label><label class="option"><input type="radio" name="Q52" value="Probably not" required> Probably not</label></div>
+<div class="field" style="margin-top:16px"><label class="title">Q53. Any other comments</label><textarea name="Q53"></textarea></div></div>
+<div class="card"><h2>Researcher Use Only</h2><div class="grid">
+<div class="field"><label class="title">Researcher notes</label><textarea name="Researcher_Notes"></textarea></div>
+<div class="field"><label class="title">Foot Arch Index — Left</label><input type="text" name="Foot_Arch_Index_Left"></div>
+<div class="field"><label class="title">Foot Arch Index — Right</label><input type="text" name="Foot_Arch_Index_Right"></div>
+<div class="field"><label class="title">Laterality (left / right / both)</label><input type="text" name="Laterality"></div>
+<div class="field"><label class="title">Sensor session file name</label><input type="text" name="Sensor_Session_File"></div>
+<div class="field"><label class="title">Walking video file name</label><input type="text" name="Walking_Video_File"></div>
+<div class="field"><label class="title">Adherence log checked (yes / no)</label><input type="text" name="Adherence_Log_Checked"></div>
+<div class="field"><label class="title">Questionnaire completed (yes / no)</label><input type="text" name="Questionnaire_Completed"></div>
+</div></div>
+<div class="card"><div class="buttons"><span id="status" class="status"></span><button type="reset" class="btn secondary">Clear</button><button type="submit" class="btn primary">Submit Survey</button></div></div>
+</form>
+</div>
+<script>
+// Paste your deployed Google Apps Script Web App URL below.
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOq2Jb2Z1k6IyG7H4OUjCS4itg3WpLjNs5rqZkDZntHUckiY201kFGlfGN7mESChTU/exec";
+
+document.getElementById("session").addEventListener("change", function(){
+  const isFollow = this.value === "Follow-up (Day 30)";
+  document.querySelectorAll(".baseline-section").forEach(el => el.classList.toggle("hidden", isFollow));
+  document.querySelectorAll(".followup-section").forEach(el => el.classList.toggle("hidden", !isFollow));
+});
+
+function formToObject(form){
+  const data = {};
+  const fd = new FormData(form);
+  for(const [key,value] of fd.entries()){
+    if(data[key]){
+      data[key] = Array.isArray(data[key]) ? data[key].concat(value) : [data[key],value];
+    } else data[key] = value;
+  }
+  return data;
+}
+
+document.getElementById("surveyForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const status = document.getElementById("status");
+  if(SCRIPT_URL.includes("PASTE_YOUR")){
+    status.textContent = "Form is ready, but the Google Apps Script URL has not been added yet.";
+    return;
+  }
+  status.textContent = "Submitting…";
+  const payload = formToObject(this);
+  try{
+    await fetch(SCRIPT_URL, {
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(payload)
+    });
+    status.textContent = "Submitted successfully.";
+    this.reset();
+    document.querySelectorAll(".followup-section").forEach(el=>el.classList.add("hidden"));
+    document.querySelectorAll(".baseline-section").forEach(el=>el.classList.remove("hidden"));
+  }catch(err){
+    console.error(err);
+    status.textContent = "Submission failed. Check the Apps Script URL and deployment settings.";
+  }
+});
+</script>
+</body></html>
