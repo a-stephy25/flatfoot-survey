@@ -304,7 +304,7 @@ function formToObject(form){
 document.getElementById("surveyForm").addEventListener("submit", async function(e){
   e.preventDefault();
   const status = document.getElementById("status");
-  if(SCRIPT_URL.includes("PASTE_YOUR")){
+  if(SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwOq2Jb2Z1k6IyG7H4OUjCS4itg3WpLjNs5rqZkDZntHUckiY201kFGlfGN7mESChTU/exec")){
     status.textContent = "Form is ready, but the Google Apps Script URL has not been added yet.";
     return;
   }
