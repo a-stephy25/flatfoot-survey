@@ -284,11 +284,23 @@ table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid
 // Paste your deployed Google Apps Script Web App URL below.
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOq2Jb2Z1k6IyG7H4OUjCS4itg3WpLjNs5rqZkDZntHUckiY201kFGlfGN7mESChTU/exec";
 
-document.getElementById("session").addEventListener("change", function(){
-  const isFollow = this.value === "Follow-up (Day 30)";
-  document.querySelectorAll(".baseline-section").forEach(el => el.classList.toggle("hidden", isFollow));
-  document.querySelectorAll(".followup-section").forEach(el => el.classList.toggle("hidden", !isFollow));
-});
+function updateSessionSections(){
+  const isFollow = document.getElementById("session").value === "Follow-up (Day 30)";
+  document.querySelectorAll(".baseline-section").forEach(section => {
+    section.classList.toggle("hidden", isFollow);
+    section.querySelectorAll("input, select, textarea, button").forEach(control => {
+      control.disabled = isFollow;
+    });
+  });
+  document.querySelectorAll(".followup-section").forEach(section => {
+    section.classList.toggle("hidden", !isFollow);
+    section.querySelectorAll("input, select, textarea, button").forEach(control => {
+      control.disabled = !isFollow;
+    });
+  });
+}
+document.getElementById("session").addEventListener("change", updateSessionSections);
+updateSessionSections();
 
 function formToObject(form){
   const data = {};
@@ -304,26 +316,47 @@ function formToObject(form){
 document.getElementById("surveyForm").addEventListener("submit", async function(e){
   e.preventDefault();
   const status = document.getElementById("status");
-  if(SCRIPT_URL.includes("https://script.google.com/macros/s/AKfycbwh_6IfSOUogZRIHOFjhty1ilHVMsG-F28TPiWEswkvGnpcEvZHs5H-ELl0lrC5GApg/exec")){
-    status.textContent = "Form is ready, but the Google Apps Script URL has not been added yet.";
+
+  if(SCRIPT_URL.includes("PASTE_YOUR")){
+    status.textContent = "Setup needed: paste your deployed Google Apps Script Web App URL into SCRIPT_URL, then save the file.";
+    status.style.color = "#b91c1c";
     return;
   }
-  status.textContent = "Submitting…";
+
+  const session = document.getElementById("session").value;
+  if(!session){
+    status.textContent = "Please select Baseline (Day 0) or Follow-up (Day 30).";
+    document.getElementById("session").focus();
+    return;
+  }
+
+  // The browser validates only enabled controls. Hidden session sections are disabled.
+  if(!this.reportValidity()) {
+    status.textContent = "Please complete the required questions highlighted by your browser.";
+    return;
+  }
+
   const payload = formToObject(this);
+  status.textContent = "Submitting… please wait.";
+  status.style.color = "#1f2937";
+
   try{
+    // Apps Script web apps often do not expose a readable cross-origin response.
+    // no-cors means the browser cannot verify whether the server saved the row.
     await fetch(SCRIPT_URL, {
       method:"POST",
       mode:"no-cors",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify(payload)
     });
-    status.textContent = "Submitted successfully.";
+    status.textContent = "Request sent. Please check the Responses tab in Google Sheets to confirm the row was saved.";
+    status.style.color = "#166534";
     this.reset();
-    document.querySelectorAll(".followup-section").forEach(el=>el.classList.add("hidden"));
-    document.querySelectorAll(".baseline-section").forEach(el=>el.classList.remove("hidden"));
+    updateSessionSections();
   }catch(err){
     console.error(err);
-    status.textContent = "Submission failed. Check the Apps Script URL and deployment settings.";
+    status.textContent = "Submission failed. Check your internet connection and the deployed Web App URL.";
+    status.style.color = "#b91c1c";
   }
 });
 </script>
